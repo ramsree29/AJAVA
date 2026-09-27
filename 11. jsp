@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+</head>
+<body>
+
+    <h1>Library Management System</h1>
+
+    <%
+        String bookName = "Java Programming";
+        String author = "James Gosling";
+        int price = 500;
+    %>
+
+    <h2>Book Details</h2>
+
+    <p>Book Name: <%= bookName %></p>
+    <p>Author: <%= author %></p>
+    <p>Price: ₹<%= price %></p>
+
+</body>
+</html>

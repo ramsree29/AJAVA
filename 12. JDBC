@@ -1,0 +1,89 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
+public class StudentDemo {
+
+    public static void main(String[] args) {
+
+        String url = "jdbc:oracle:thin:@//192.168.44.9:1521/oracle";
+        String username = "cc934";
+        String password = "cc934";
+
+        try {
+
+            
+            Connection con = DriverManager.getConnection(
+                    url, username, password);
+
+            System.out.println("Connected to Oracle Database!");
+
+          
+            Statement stmt = con.createStatement();
+
+
+            String insertSQL1 =
+                    "INSERT INTO STUDENT (ID, NAME) VALUES (1, 'ARUN')";
+            stmt.executeUpdate(insertSQL1);
+
+          
+            String insertSQL2 =
+                    "INSERT INTO STUDENT (ID, NAME) VALUES (2, 'KUMAR')";
+            stmt.executeUpdate(insertSQL2);
+
+            
+            String insertSQL3 =
+                    "INSERT INTO STUDENT (ID, NAME) VALUES (3, 'RAHUL')";
+            stmt.executeUpdate(insertSQL3);
+
+            System.out.println("3 Students inserted successfully!");
+
+        
+            String updateSQL =
+                    "UPDATE STUDENT SET NAME = 'VIJAY' WHERE ID = 1";
+
+            stmt.executeUpdate(updateSQL);
+
+            System.out.println("1 Student updated successfully!");
+
+         
+            String deleteSQL =
+                    "DELETE FROM STUDENT WHERE ID = 3";
+
+            stmt.executeUpdate(deleteSQL);
+
+            System.out.println("1 Student deleted successfully!");
+
+           
+            String selectSQL = "SELECT * FROM STUDENT";
+
+            ResultSet rs = stmt.executeQuery(selectSQL);
+
+            System.out.println();
+            System.out.println("STUDENT DETAILS");
+            
+
+            while (rs.next()) {
+
+                System.out.println(
+                        "ID   : " + rs.getInt("ID"));
+
+                System.out.println(
+                        "Name : " + rs.getString("NAME"));
+
+                
+            }
+
+           
+            rs.close();
+            stmt.close();
+            con.close();
+
+            System.out.println("Connection closed.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

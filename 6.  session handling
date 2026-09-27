@@ -1,0 +1,53 @@
+INDEX.HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Session</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Login</h2>
+<form action="sessiontracking">
+    Name:
+    <input type="text" name="name">
+    <input type="submit" value="Login">
+</form>
+    </body>
+</html>
+SESSIONTRACKING
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+@WebServlet(urlPatterns = {"/sessiontracking"})
+public class sessiontracking extends HttpServlet {
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        res.setContentType("text/html;charset=UTF-8");
+         PrintWriter out = res.getWriter();
+        HttpSession s = req.getSession();
+        String name = req.getParameter("name");
+        if (name != null)
+            s.setAttribute("name", name);
+        Integer count = (Integer)s.getAttribute("count");
+        if (count == null)
+            count = 1;
+        else
+            count++;
+        s.setAttribute("count", count);
+        out.println("<html><body>");
+        out.println("<h2>Session Tracking Details</h2>");
+        out.println("Session ID: " + s.getId() + "<br>");
+        out.println("Creation Time: " + new Date(s.getCreationTime()) + "<br>");
+        out.println("Last Accessed: " + new Date(s.getLastAccessedTime()) + "<br>");
+        out.println("Visit Count: " + count + "<br>");
+        out.println("Name: " + s.getAttribute("name"));
+        out.println("</body></html>");
+    }
+}

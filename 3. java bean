@@ -1,0 +1,44 @@
+package app.jb;
+
+class ClubBean {
+    private String name, club;
+    private int age;
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setAge(int a) {
+        age = a;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setClub(String c) {
+        club = c;
+    }
+
+    public String getClub() {
+        return club;
+    }
+}
+
+public class appjb {
+    public static void main(String[] args) {
+        ClubBean c = new ClubBean();
+
+        c.setName("Lakshmi");
+        c.setAge(20);
+        c.setClub("Coding Club");
+
+        System.out.println("Name: " + c.getName());
+        System.out.println("Age: " + c.getAge());
+        System.out.println("Club: " + c.getClub());
+    }
+}

@@ -1,0 +1,72 @@
+index.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admission Form</title>
+</head>
+<body>
+
+<h2>Student Admission Form</h2>
+
+<form action="helloservlet" method="post">
+
+    Name:
+    <input type="text" name="username">
+    <br><br>
+
+    Age:
+    <input type="text" name="age">
+    <br><br>
+
+    Gender:
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <br><br>
+
+    Course:
+    <select name="course">
+        <option>BCA</option>
+        <option>BSc</option>
+        <option>MCA</option>
+    </select>
+    <br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>
+
+helloservlet:
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(urlPatterns = {"/helloservlet"})
+public class helloservlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+
+        String name = request.getParameter("username");
+        String age = request.getParameter("age");
+        String gender = request.getParameter("gender");
+        String course = request.getParameter("course");
+
+        out.println("<html><body>");
+        out.println("<h2>Admission Details</h2>");
+        out.println("Name: " + name + "<br>");
+        out.println("Age: " + age + "<br>");
+        out.println("Gender: " + gender + "<br>");
+        out.println("Course: " + course + "<br>");
+        out.println("<h3>Admission Successful!</h3>");
+        out.println("</body></html>");
+    }
+}
